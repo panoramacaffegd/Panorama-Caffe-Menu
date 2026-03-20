@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#3B2314">
+<title>Panorama Caffè — Меню</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --espresso: #3B2314;
+  --dark-roast: #5C3D2E;
+  --amber: #C8873E;
+  --golden: #D4A04A;
+  --warm-gold: #E8B94E;
+  --cream: #FAF3E8;
+  --soft-cream: #FFF8F0;
+  --latte: #E8D5BD;
+  --cappuccino: #A67B5B;
+  --mocha: #6B4226;
+  --shadow: rgba(59, 35, 20, 0.12);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lora', 'Times New Roman', serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 60px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--espresso);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-section {
+  opacity: 0;
+  animation: fadeUp 0.7s ease-out forwards;
+}
+
+.hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+  background: linear-gradient(160deg, var(--espresso) 0%, var(--dark-roast) 30%, var(--mocha) 60%, var(--cappuccino) 100%);
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(200,135,62,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(232,185,78,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+.hero-ornament {
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--golden);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s ease-out forwards;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--soft-cream);
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s ease-out forwards;
+}
+
+.hero-accent {
+  display: inline-block;
+  width: 50px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--golden), transparent);
+  margin: 0.8rem 0;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.7s ease-out forwards;
+}
+
+.hero .tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--latte);
+  max-width: 300px;
+  line-height: 1.5;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s ease-out forwards;
+}
+
+.hero .menu-label {
+  margin-top: 2rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--cappuccino);
+  opacity: 0;
+  animation: fadeUp 0.6s 1s ease-out forwards;
+}
+
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--soft-cream);
+  border-bottom: 1px solid rgba(166,123,91,0.15);
+  box-shadow: 0 2px 12px var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-scroll {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  justify-content: center;
+}
+
+.nav-scroll::-webkit-scrollbar { display: none; }
+
+.nav-link {
+  flex-shrink: 0;
+  padding: 0.45rem 0.9rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--dark-roast);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-link.active {
+  background: var(--espresso);
+  color: var(--cream);
+  border-color: var(--espresso);
+}
+
+.menu-content {
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 4rem;
+}
+
+.menu-section { margin-bottom: 2.5rem; }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.section-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--espresso);
+  margin-bottom: 0.15rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--cappuccino);
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+}
+
+.section-divider span {
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+
+.section-divider-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(166,123,91,0.1);
+  gap: 0.75rem;
+}
+
+.menu-item:last-child { border-bottom: none; }
+
+.item-info { flex: 1; }
+
+.item-name {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--espresso);
+  line-height: 1.3;
+}
+
+.item-desc {
+  font-size: 0.82rem;
+  color: var(--cappuccino);
+  margin-top: 0.15rem;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.item-price {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--amber);
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+.flavor-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.flavor-tag {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-style: normal;
+  color: var(--dark-roast);
+  background: var(--latte);
+  padding: 0.2rem 0.55rem;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.addon-note {
+  margin-top: 1.2rem;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, rgba(200,135,62,0.08), rgba(232,185,78,0.06));
+  border-left: 3px solid var(--golden);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.8rem;
+  color: var(--dark-roast);
+  line-height: 1.5;
+}
+
+.addon-note strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--espresso);
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem;
+  background: linear-gradient(180deg, var(--cream), var(--latte));
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--espresso);
+}
+
+.footer-info {
+  font-size: 0.78rem;
+  color: var(--cappuccino);
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+
+.footer-ornament {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--amber);
+}
+
+@media (max-width: 359px) {
+  .hero { min-height: 48vh; padding: 2.5rem 1.2rem 2rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero .tagline { font-size: 0.92rem; max-width: 240px; }
+  .hero-ornament { font-size: 0.65rem; letter-spacing: 0.35em; }
+  .menu-content { padding: 0.75rem 1rem 3rem; }
+  .section-header h2 { font-size: 1.3rem; }
+  .item-name { font-size: 0.95rem; }
+  .item-desc { font-size: 0.78rem; }
+  .item-price { font-size: 0.88rem; }
+  .nav-link { font-size: 0.7rem; padding: 0.4rem 0.7rem; }
+  .flavor-tag { font-size: 0.62rem; padding: 0.15rem 0.45rem; }
+  .addon-note { font-size: 0.75rem; padding: 0.8rem 0.9rem; }
+}
+
+@media (min-width: 360px) and (max-width: 399px) {
+  .hero h1 { font-size: 2.5rem; }
+  .hero .tagline { font-size: 0.95rem; }
+  .menu-content { padding: 0.85rem 1.1rem 3.5rem; }
+}
+
+@media (min-width: 400px) {
+  .hero h1 { font-size: 3.2rem; }
+  .menu-content { padding: 1.5rem 1.5rem 4rem; }
+}
+
+@media (min-width: 600px) {
+  .hero { min-height: 50vh; }
+  .hero h1 { font-size: 3.6rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-ornament">Кафе &amp; Настроение</div>
+  <h1>Panorama<br>Caffè</h1>
+  <div class="hero-accent"></div>
+  <p class="tagline">Където всяка глътка разкрива по-широк хоризонт — спри, погледни нагоре, усети момента.</p>
+  <div class="menu-label">· &nbsp; Нашето Меню &nbsp; ·</div>
+</header>
+
+<nav class="nav-bar">
+  <div class="nav-scroll">
+    <a href="#hot" class="nav-link">Топли напитки</a>
+    <a href="#chocolate" class="nav-link">Шоколад</a>
+    <a href="#cold" class="nav-link">Студени напитки</a>
+    <a href="#shakes" class="nav-link">Шейкове</a>
+  </div>
+</nav>
+
+<main class="menu-content">
+
+  <section id="hot" class="menu-section fade-section">
+    <div class="section-header">
+      <span class="section-icon">☕</span>
+      <h2>Топли Напитки</h2>
+      <p class="section-subtitle">Класика с характер</p>
+      <div class="section-divider"><span></span><div class="section-divider-dot"></div><span></span></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Кафе Еспресо</div>
+        <div class="item-desc">Чиста доза кафе, извлечена с прецизност — наситено и ароматно</div>
+      </div>
+      <div class="item-price">1.00€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Еспресо Макиато</div>
+        <div class="item-desc">Еспресо с лек докосване на млечна пяна — баланс между сила и нежност</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Кафе с Млечна Пяна</div>
+        <div class="item-desc">Еспресо увенчано с гъста, копринена млечна пяна</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Кафе с Бита Сметана</div>
+        <div class="item-desc">Еспресо с щедра порция бита сметана — кремообразно удоволствие</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Капучино</div>
+        <div class="item-desc">Двойно еспресо, парено мляко и кадифена пяна — класиката в най-добрия ѝ вид</div>
+      </div>
+      <div class="item-price">2.00€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Лате Макиато</div>
+        <div class="item-desc">Пластове парено мляко и еспресо с красив каймак на повърхността</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Мокачино</div>
+        <div class="item-desc">Еспресо среща шоколад Adore и парено мляко — топло, шоколадово изкушение</div>
+      </div>
+      <div class="item-price">2.00€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Мокачино Ванилия</div>
+        <div class="item-desc">Нашето мокачино с нотка ванилия и бял шоколад — мек и обгръщащ вкус</div>
+      </div>
+      <div class="item-price">2.50€</div>
+    </div>
+
+    <div class="addon-note">
+      <strong>+ Аромат по избор</strong>
+      Добави вкус към напитката си: cinnamon, gingerbread, caramel, chocolate, hazelnut
+    </div>
+  </section>
+
+  <section id="chocolate" class="menu-section fade-section">
+    <div class="section-header">
+      <span class="section-icon">🍫</span>
+      <h2>Горещ Шоколад</h2>
+      <p class="section-subtitle">Бианчи — топла прегръдка в чаша</p>
+      <div class="section-divider"><span></span><div class="section-divider-dot"></div><span></span></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Горещ Шоколад Бианчи — Класик</div>
+        <div class="item-desc">Гъст горещ шоколад на прах Adore, разбит с прясно мляко — бял или кафяв по избор</div>
+      </div>
+      <div class="item-price">2.00€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Горещ Шоколад Бианчи — Вкусове</div>
+        <div class="item-desc">Шоколад Adore с ароматен сироп по избор, в чаша Бианчи с декорация от бита сметана</div>
+        <div class="flavor-list">
+          <span class="flavor-tag">Classic</span>
+          <span class="flavor-tag">Vanilla</span>
+          <span class="flavor-tag">Cinnamon</span>
+          <span class="flavor-tag">Caramel</span>
+          <span class="flavor-tag">Strawberry</span>
+          <span class="flavor-tag">Raspberry</span>
+          <span class="flavor-tag">Coconut</span>
+          <span class="flavor-tag">Banana</span>
+          <span class="flavor-tag">Hazelnut</span>
+        </div>
+      </div>
+      <div class="item-price">2.50€</div>
+    </div>
+  </section>
+
+  <section id="cold" class="menu-section fade-section">
+    <div class="section-header">
+      <span class="section-icon">🧊</span>
+      <h2>Студени Напитки</h2>
+      <p class="section-subtitle">Освежаващо усещане</p>
+      <div class="section-divider"><span></span><div class="section-divider-dot"></div><span></span></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Айс Мокачино</div>
+        <div class="item-desc">Еспресо, шоколад Adore, прясно мляко и лед — разхлаждащо шоколадово кафе</div>
+      </div>
+      <div class="item-price">2.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Айс Мокачино Ванилия</div>
+        <div class="item-desc">Студена версия с бял шоколад, ванилия и еспресо — нежно и кремообразно</div>
+      </div>
+      <div class="item-price">2.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Бяло Фрапе</div>
+        <div class="item-desc">Инстантно кафе Бианчи, разбито със студена вода и лед — леко и пенливо</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Черно Фрапе</div>
+        <div class="item-desc">Еспресо, разбито с лед и студена вода — силно и освежаващо</div>
+      </div>
+      <div class="item-price">1.50€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Fredo Cappuccino Bianchi</div>
+        <div class="item-desc">Студено прясно мляко, разпенено и изляно върху лед с еспресо — кремообразно фредо</div>
+      </div>
+      <div class="item-price">-€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">ICE 3 in 1</div>
+        <div class="item-desc">Лед, прясно мляко и еспресо — блендирани до хомогенна смес със ситни кристали</div>
+      </div>
+      <div class="item-price">1.00€</div>
+    </div>
+
+    <div class="addon-note">
+      <strong>+ Аромат по избор</strong>
+      cinnamon, gingerbread, caramel, chocolate, hazelnut
+    </div>
+  </section>
+
+  <section id="shakes" class="menu-section fade-section">
+    <div class="section-header">
+      <span class="section-icon">🥤</span>
+      <h2>Студени Шейкове</h2>
+      <p class="section-subtitle">Блендирани с шоколад и настроение</p>
+      <div class="section-divider"><span></span><div class="section-divider-dot"></div><span></span></div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Шейк Класик</div>
+        <div class="item-desc">Прясно мляко, шоколад на прах Adore и лед — бял или кафяв по избор, с настърган шоколад отгоре</div>
+      </div>
+      <div class="item-price">2.00€</div>
+    </div>
+
+    <div class="menu-item">
+      <div class="item-info">
+        <div class="item-name">Шоколадов Шейк с Вкусове</div>
+        <div class="item-desc">Прясно мляко, Adore шоколад, ароматен сироп и лед, с декорация от бита сметана</div>
+        <div class="flavor-list">
+          <span class="flavor-tag">Gingerbread</span>
+          <span class="flavor-tag">Banana</span>
+          <span class="flavor-tag">Coconut</span>
+          <span class="flavor-tag">Mint</span>
+          <span class="flavor-tag">Strawberry</span>
+          <span class="flavor-tag">Raspberry</span>
+          <span class="flavor-tag">Caramel</span>
+          <span class="flavor-tag">Hazelnut</span>
+        </div>
+      </div>
+      <div class="item-price">2.50€</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer fade-section">
+  <div class="footer-logo">Panorama Caffè</div>
+  <div class="footer-info">
+    Отворено всеки ден<br>
+    Попитайте за алтернативи на млякото<br>
+    Всички цени са с включен ДДС
+  </div>
+  <div class="footer-ornament">· &nbsp; БЛАГОДАРИМ ВИ &nbsp; ·</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Fade-in
+  const fadeSections = document.querySelectorAll('.fade-section');
+  fadeSections.forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(20px)';
+    s.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+    s.style.animation = 'none';
+  });
+
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  fadeSections.forEach(s => fadeObserver.observe(s));
+
+  // ── Nav tracking (rewritten) ──
+  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+  const sections = Array.from(document.querySelectorAll('.menu-section'));
+  const navScroll = document.querySelector('.nav-scroll');
+  const navBar = document.querySelector('.nav-bar');
+  let locked = false;
+  let lockTimer = null;
+  let activeId = null;
+
+  function activate(id) {
+    if (id === activeId) return;
+    activeId = id;
+    // Remove ALL active classes with explicit loop
+    navLinks.forEach(l => { l.classList.remove('active'); });
+    // Add to the one match
+    const target = navLinks.find(l => l.getAttribute('href') === '#' + id);
+    if (target) {
+      target.classList.add('active');
+      // Horizontal scroll the nav (never scrollIntoView)
+      const nr = navScroll.getBoundingClientRect();
+      const tr = target.getBoundingClientRect();
+      navScroll.scrollTo({
+        left: navScroll.scrollLeft + (tr.left - nr.left) - (nr.width / 2) + (tr.width / 2),
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  function detectSection() {
+    // If scrolled to bottom of page, activate the last section
+    if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight - 30) {
+      activate(sections[sections.length - 1].id);
+      return;
+    }
+
+    const navBottom = navBar.getBoundingClientRect().bottom;
+    let found = null;
+    let bestDist = Infinity;
+
+    // Pick the section whose header is closest to (but not far below) the nav
+    for (let i = 0; i < sections.length; i++) {
+      const top = sections[i].getBoundingClientRect().top;
+      const dist = top - navBottom;
+      // Section header is within range: above nav bottom + some tolerance below
+      if (dist < 60 && Math.abs(dist) < bestDist) {
+        bestDist = Math.abs(dist);
+        found = sections[i];
+      }
+    }
+
+    // Fallback: last section whose top has scrolled past the nav
+    if (!found) {
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].getBoundingClientRect().top <= navBottom + 60) {
+          found = sections[i];
+          break;
+        }
+      }
+    }
+
+    if (found) activate(found.id);
+  }
+
+  // Scroll listener
+  let raf = false;
+  window.addEventListener('scroll', () => {
+    if (locked) return;
+    if (!raf) {
+      raf = true;
+      requestAnimationFrame(() => { detectSection(); raf = false; });
+    }
+  }, { passive: true });
+
+  // Click handler
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').substring(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Lock scroll detection, force-reset, activate clicked
+      locked = true;
+      if (lockTimer) clearTimeout(lockTimer);
+      activeId = null;
+      activate(id);
+
+      // Scroll page
+      const y = el.getBoundingClientRect().top + window.pageYOffset - navBar.offsetHeight - 10;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+
+      // Unlock after animation
+      lockTimer = setTimeout(() => {
+        locked = false;
+        activeId = null;
+        detectSection();
+      }, 1200);
+    });
+  });
+
+  detectSection();
+});
+</script>
+
+</body>
+</html>
